@@ -47,9 +47,6 @@
                                             <constraint firstItem="rk7-M2-oxo" firstAttribute="centerX" secondItem="pH0-c0-l8A" secondAttribute="centerX" id="3JV-nm-Lla"/>
                                             <constraint firstItem="rk7-M2-oxo" firstAttribute="centerY" secondItem="pH0-c0-l8A" secondAttribute="centerY" id="RBu-tN-lo9"/>
                                         </constraints>
-                                        <connections>
-                                            <segue destination="ot2-er-ylq" kind="show" identifier="DetailSegue" id="Fgr-QU-0hU"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -70,6 +67,7 @@
                     <navigationItem key="navigationItem" id="Zpa-zt-10x"/>
                     <connections>
                         <outlet property="collectionView" destination="iu6-Nj-SdR" id="hpm-eX-Ci8"/>
+                        <segue destination="ot2-er-ylq" kind="show" identifier="DetailSegue" id="Nfa-Bc-aZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
