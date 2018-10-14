@@ -15,6 +15,17 @@ class ViewController: UIViewController {
     var CollectionData = ["1 🏆", "2 🐸", "3 🍩", "4 😸", "5 🤡", "6 👾", "7 👻", "8 🍖",
                           "9 🎸", "10 🐯", "11 🐷", "12 🌋"]
     
+    @IBAction func addItem() {
+        collectionView.performBatchUpdates({
+            for _ in 0..<2 {
+                let text = "\(CollectionData.count + 1) 🏓"
+                CollectionData.append(text)
+                let indexPath = IndexPath(row: CollectionData.count - 1, section: 0)
+                collectionView.insertItems(at: [indexPath])
+            }
+            }, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = (view.frame.size.width - 20 ) / 3
