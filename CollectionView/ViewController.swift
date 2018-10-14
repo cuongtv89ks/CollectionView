@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet private weak var collectionView : UICollectionView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     var CollectionData = ["1 🏆", "2 🐸", "3 🍩", "4 😸", "5 🤡", "6 👾", "7 👻", "8 🍖",
                           "9 🎸", "10 🐯", "11 🐷", "12 🌋"]
@@ -35,6 +36,20 @@ class ViewController: UIViewController {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         collectionView.refreshControl = refresh
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        addButton.isEnabled = !editing
+        collectionView.allowsMultipleSelection = editing
+        let indexPaths = collectionView.indexPathsForVisibleItems
+        for indexPath in indexPaths {
+            let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+            cell.isEditing = editing
+        }
     }
     
     @objc func refresh() {
@@ -49,16 +64,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
-        if let label = cell.viewWithTag(100) as? UILabel {
-            label.text = CollectionData[indexPath.row]
-        }
+        cell.titleLabel.text = CollectionData[indexPath.row]
+        cell.isEditing = isEditing
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isEditing {
+            return
+        }
         performSegue(withIdentifier: "DetailSegue", sender: indexPath)
     }
     

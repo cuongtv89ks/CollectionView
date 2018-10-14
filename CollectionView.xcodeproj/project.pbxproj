@@ -13,6 +13,7 @@
 		01E616712173251500ED8E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E616702173251500ED8E10 /* Assets.xcassets */; };
 		01E616742173251500ED8E10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E616722173251500ED8E10 /* LaunchScreen.storyboard */; };
 		01E6167C2173380600ED8E10 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6167B2173380600ED8E10 /* DetailViewController.swift */; };
+		01E6167E21737E6C00ED8E10 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6167D21737E6C00ED8E10 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		01E616732173251500ED8E10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01E616752173251500ED8E10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01E6167B2173380600ED8E10 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		01E6167D21737E6C00ED8E10 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				01E616722173251500ED8E10 /* LaunchScreen.storyboard */,
 				01E616752173251500ED8E10 /* Info.plist */,
 				01E6167B2173380600ED8E10 /* DetailViewController.swift */,
+				01E6167D21737E6C00ED8E10 /* CollectionViewCell.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				01E6167C2173380600ED8E10 /* DetailViewController.swift in Sources */,
 				01E6166C2173251300ED8E10 /* ViewController.swift in Sources */,
+				01E6167E21737E6C00ED8E10 /* CollectionViewCell.swift in Sources */,
 				01E6166A2173251300ED8E10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
