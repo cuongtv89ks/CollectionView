@@ -38,5 +38,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //let cell = collectionView.cellForItem(at: indexPath)
+//        let label = cell!.viewWithTag(100) as! UILabel
+//        print(label.text!)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailSegue" {
+            if let dest = segue.destination as? DetailViewController,
+                let index = collectionView.indexPathsForSelectedItems?.first {
+                dest.selection = CollectionData[index.row]
+            }
+        }
+    }
 }
