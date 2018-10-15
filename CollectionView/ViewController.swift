@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var collectionView : UICollectionView!
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     var CollectionData = ["1 🏆", "2 🐸", "3 🍩", "4 😸", "5 🤡", "6 👾", "7 👻", "8 🍖",
                           "9 🎸", "10 🐯", "11 🐷", "12 🌋"]
@@ -27,6 +28,17 @@ class ViewController: UIViewController {
             }, completion: nil)
     }
     
+    @IBAction func deleteItem() {
+        if let selected = collectionView.indexPathsForSelectedItems {
+            let items = selected.map { $0.item }.sorted().reversed()
+            for item in items {
+                CollectionData.remove(at: item)
+            }
+            collectionView.deleteItems(at: selected)
+        }
+        navigationController?.isToolbarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = (view.frame.size.width - 20 ) / 3
@@ -39,11 +51,23 @@ class ViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         
+        navigationController?.isToolbarHidden = true
+        
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        
         addButton.isEnabled = !editing
+        deleteButton.isEnabled = editing
+        if !editing {
+            navigationController?.isToolbarHidden = true
+        }
+        
+        collectionView.indexPathsForSelectedItems?.forEach {
+            collectionView.deselectItem(at: $0, animated: false)
+        }
+        
         collectionView.allowsMultipleSelection = editing
         let indexPaths = collectionView.indexPathsForVisibleItems
         for indexPath in indexPaths {
@@ -55,6 +79,15 @@ class ViewController: UIViewController {
     @objc func refresh() {
         addItem()
         collectionView.refreshControl?.endRefreshing()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailSegue" {
+            if let dest = segue.destination as? DetailViewController,
+                let index = sender as? IndexPath {
+                dest.selection = CollectionData[index.row]
+            }
+        }
     }
 }
 
@@ -74,17 +107,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if isEditing {
+            navigationController?.isToolbarHidden = false
             return
         }
         performSegue(withIdentifier: "DetailSegue", sender: indexPath)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DetailSegue" {
-            if let dest = segue.destination as? DetailViewController,
-                let index = sender as? IndexPath {
-                dest.selection = CollectionData[index.row]
-            }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let selected = collectionView.indexPathsForSelectedItems, selected.count == 0 {
+            navigationController?.isToolbarHidden = true
         }
     }
+    
+    
 }
